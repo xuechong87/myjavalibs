@@ -16,7 +16,7 @@ import java.lang.annotation.Target;
 public @interface ExlModel {
 	
 	/**
-	 * 
+	 * 导出的类型
 	 * @return
 	 * @author xuechong
 	 */

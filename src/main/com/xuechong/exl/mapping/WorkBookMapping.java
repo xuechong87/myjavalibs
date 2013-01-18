@@ -7,6 +7,7 @@ public class WorkBookMapping {
 	private List<String> titles;
 	@SuppressWarnings("unchecked")
 	private List datas;
+	
 	public String getHead() {
 		return head;
 	}
