@@ -32,7 +32,7 @@ public class ExlQueryUtil {
 	public void exportByHql(String head,List<String> conditions,String hql,List<Object> params){
 		List<Map> result = this.dao.findMapList(hql, params);
 		if(result.isEmpty()){
-			return;
+			//TODO
 		}
 		QueryResultProcessor.Process(head, conditions, result, hql);
 	}
@@ -52,7 +52,7 @@ public class ExlQueryUtil {
 	public void exportBySql(String head,List<String> conditions,String sql, List<Object> params){
 		List<Map> result = this.dao.findMapListBySQL(sql, params);
 		if(result.isEmpty()){
-			return;
+			//TODO
 		}
 		QueryResultProcessor.Process(head, conditions, result, sql);
 	}

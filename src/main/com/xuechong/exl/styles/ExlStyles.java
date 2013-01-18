@@ -8,7 +8,6 @@ import org.apache.poi.ss.usermodel.Workbook;
 /**
  * the styles of the export exlcells
  * @author xuechong
- *
  */
 public class ExlStyles {
 	
@@ -21,7 +20,7 @@ public class ExlStyles {
 	public static CellStyle getHeadStyle(Workbook wb) {
 		CellStyle style;
 		Font titleFont = wb.createFont();
-		titleFont.setFontHeightInPoints((short) 45);
+		titleFont.setFontHeightInPoints((short) 20);
 		titleFont.setColor(IndexedColors.BLACK.getIndex());
 		style = wb.createCellStyle();
 		style.setAlignment(CellStyle.ALIGN_CENTER);
@@ -29,6 +28,7 @@ public class ExlStyles {
 		style.setFont(titleFont);
 		return style;
 	}
+	
 	/**
 	 * the style of the titles
 	 * @param wb
@@ -39,7 +39,7 @@ public class ExlStyles {
 		CellStyle style;
 		Font font = wb.createFont();
         font.setBoldweight(Font.BOLDWEIGHT_BOLD);
-        style = createBorderedStyle(wb);
+        style = createThickBorderedStyle(wb);
         style.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
         style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         style.setAlignment(CellStyle.ALIGN_CENTER);
@@ -56,6 +56,20 @@ public class ExlStyles {
 	public static CellStyle getCommonStyle(Workbook wb) {
 		CellStyle style;
 		style = createBorderedStyle(wb);
+		style.setAlignment(CellStyle.ALIGN_LEFT);
+		style.setWrapText(true);
+		return style;
+	}
+	
+	/**
+	 * condition str styles
+	 * @param wb
+	 * @return
+	 * @author xuechong
+	 */
+	public static CellStyle getConditionStyle(Workbook wb){
+		CellStyle style;
+		style = wb.createCellStyle();
 		style.setAlignment(CellStyle.ALIGN_LEFT);
 		style.setWrapText(true);
 		return style;
@@ -79,4 +93,24 @@ public class ExlStyles {
         style.setTopBorderColor(IndexedColors.BLACK.getIndex());
         return style;
     }
+	
+	/**
+	 * border styles
+	 * @param wb
+	 * @return
+	 * @author xuechong
+	 */
+	private static CellStyle createThickBorderedStyle(Workbook wb){
+        CellStyle style = wb.createCellStyle();
+        style.setBorderRight(CellStyle.BORDER_THICK);
+        style.setRightBorderColor(IndexedColors.BLACK.getIndex());
+        style.setBorderBottom(CellStyle.BORDER_THICK);
+        style.setBottomBorderColor(IndexedColors.BLACK.getIndex());
+        style.setBorderLeft(CellStyle.BORDER_THICK);
+        style.setLeftBorderColor(IndexedColors.BLACK.getIndex());
+        style.setBorderTop(CellStyle.BORDER_THICK);
+        style.setTopBorderColor(IndexedColors.BLACK.getIndex());
+        return style;
+    }
+	
 }

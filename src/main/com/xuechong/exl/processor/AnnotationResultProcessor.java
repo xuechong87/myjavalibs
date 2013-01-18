@@ -1,5 +1,9 @@
 package com.xuechong.exl.processor;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 import org.apache.poi.ss.usermodel.Workbook;
@@ -12,18 +16,15 @@ public class AnnotationResultProcessor {
 	@SuppressWarnings("unchecked")
 	public static void process(String head,List<String> conditions,List dataList,Integer viewType){
 		Workbook book;
-		if(dataList.isEmpty()){
+		if(dataList==null||dataList.isEmpty()){
 			book = ExlBuilder.buildEmptyWorkBook(head,conditions);
 		}else{
-			book = null;
-			Class c = dataList.iterator().next().getClass();
-			if(c.getAnnotation(ExlModel.class)==null){
-				throw new IllegalArgumentException("不支持的导出类型");
-			}
+			book = ExlBuilder.buildWorkBook(head,conditions,dataList,viewType);
 		}
 		
 		writeBook(book);
 	}
+
 
 	/**
 	 * 输出
@@ -31,7 +32,21 @@ public class AnnotationResultProcessor {
 	 * @author xuechong
 	 */
 	private static void writeBook(Workbook book) {
-		
+		File file = new File("c:/test1.xls");
+		FileOutputStream fos;
+		try {
+			fos = new FileOutputStream(file);
+			book.write(fos);
+			fos.close();
+			fos.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}finally{
+			fos = null;
+		}
 	}
+	
 	
 }
