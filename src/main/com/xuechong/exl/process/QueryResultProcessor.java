@@ -50,7 +50,7 @@ public class QueryResultProcessor {
 	@SuppressWarnings("unchecked")
 	private static void exportData(String head, List<String> titles,
 			List<String> conditions, List<Map> datas) {
-		ExlExporter.export(head, conditions, titles, datas);
+		//TODO
 	}
 
 }

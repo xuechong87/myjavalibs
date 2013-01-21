@@ -10,6 +10,15 @@ import com.xuechong.exl.process.writer.WorkBookWriter;
 
 public class AnnotationResultProcessor {
 	
+	/**
+	 * process the datas with Annotataions
+	 * @throws IllegalArgumentException if there is no ExlModel Annotation on the data Objects
+	 * @param head
+	 * @param conditions
+	 * @param dataList
+	 * @param viewType
+	 * @author xuechong
+	 */
 	@SuppressWarnings("unchecked")
 	public static void process(String head,List<String> conditions,List dataList,Integer viewType){
 		Workbook book;
@@ -18,9 +27,7 @@ public class AnnotationResultProcessor {
 		}else{
 			book = ExlAnnotationBuilder.buildAnnoWorkBook(head,conditions,dataList,viewType);
 		}
-		WorkBookWriter.writeBook(book);
+		WorkBookWriter.writeBook(book,head);
 	}
-
-	
 	
 }

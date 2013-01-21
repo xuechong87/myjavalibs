@@ -11,20 +11,57 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
 
 import com.xuechong.exl.mapping.BookDataMapping;
-import com.xuechong.exl.styles.ExlStyles;
+import com.xuechong.exl.process.builder.style.ExlStyles;
 
 public class ExlBuilder {
+	
 	private static final String NO_DATA_WARN = "没有符合条件的数据!";
-
+	
+	/**
+	 * build the head and conditions
+	 * @param head
+	 * @param conditions
+	 * @return
+	 * @author xuechong
+	 */
 	public static Workbook buildEmptyWorkBook(String head,
 			List<String> conditions) {
 		Workbook book = buildHeanAndConditions(head, conditions);
 		return buildNoDataWarns(book);
 	}
 	
+	/**
+	 * build the datacontents
+	 * @param book
+	 * @param data
+	 * @return
+	 * @author xuechong
+	 */
 	static Workbook buildDatas(Workbook book,BookDataMapping data){
-		//TODO
-		
+		Sheet sheet = book.getSheetAt(0);
+		int curRowNum = sheet.getLastRowNum()+1;
+		if (data.getTitles().size() > 0) {
+			Row titleRow = sheet.createRow(curRowNum);
+			Cell titleCell;
+			for (int i = 0, end = data.getTitles().size(); i < end; i++) {
+				titleCell = titleRow.createCell(i);
+				titleCell.setCellValue(data.getTitles().get(i));
+				titleCell.setCellStyle(ExlStyles.getTitleStyle(book));
+			}
+			curRowNum++;
+			if (data.getDatas().size() > 0) {
+				Row dataRow;
+				for (int i = 0, end = data.getDatas().size(); i < end; i++) {
+					dataRow = sheet.createRow(curRowNum);
+					curRowNum++;
+					for (int j = 0,jend = data.getDatas().get(i).size(); j < jend; j++) {
+						Cell dataCell = dataRow.createCell(j);
+						dataCell.setCellStyle(ExlStyles.getCommonStyle(book));
+						dataCell.setCellValue(data.getDatas().get(i).get(j));
+					}
+				}
+			}
+		}
 		return book;
 	}
 
@@ -57,14 +94,15 @@ public class ExlBuilder {
 		Workbook book = new HSSFWorkbook();
 		int curRow = 0;
 		String headTrim = StringUtils.trimToNull(head);
-		headTrim = headTrim == null ? "Workbook" : headTrim;
-		Sheet sheet = book.createSheet(headTrim);
-
-		// put headcontent
-		Cell headCell = sheet.createRow(curRow).createCell(0);
-		sheet.addMergedRegion(createMergRegion(headTrim, curRow));
-		headCell.setCellStyle(ExlStyles.getHeadStyle(book));
-		headCell.setCellValue(headTrim);
+		
+		Sheet sheet = book.createSheet(headTrim == null ? "Workbook" : headTrim);
+		if(headTrim!=null){
+			// put headcontent
+			Cell headCell = sheet.createRow(curRow).createCell(0);
+			sheet.addMergedRegion(createMergRegion(headTrim, curRow));
+			headCell.setCellStyle(ExlStyles.getHeadStyle(book));
+			headCell.setCellValue(headTrim);
+		}
 
 		// put conditions
 		if (conditions != null && !conditions.isEmpty()) {

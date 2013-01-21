@@ -1,4 +1,4 @@
-package com.xuechong.exl.styles;
+package com.xuechong.exl.process.builder.style;
 
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Font;
@@ -44,6 +44,7 @@ public class ExlStyles {
         style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         style.setAlignment(CellStyle.ALIGN_CENTER);
         style.setFont(font);
+        style.setWrapText(true);
         return style;
 	}
 	

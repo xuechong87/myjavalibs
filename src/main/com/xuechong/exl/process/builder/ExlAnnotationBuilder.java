@@ -27,13 +27,14 @@ public class ExlAnnotationBuilder {
 	@SuppressWarnings("unchecked")
 	public static Workbook buildAnnoWorkBook(String head, List<String> conditions,
 			List dataList, Integer viewType) {
+		if(viewType==null){
+			viewType = 0;
+		}
 		Workbook book = ExlBuilder.buildHeanAndConditions(head,conditions);
-		book = ExlBuilder.buildEmptyWorkBook(head, conditions);
-		//TODO
 		BookDataMapping bookData = new BookDataMapping();
 		bookData.setTitles(encapeTitles(dataList.get(0),viewType));
 		bookData.setDatas(encapeValue(dataList, viewType));
-		
+		ExlBuilder.buildDatas(book, bookData);
 		return book;
 	}
 	
@@ -46,7 +47,7 @@ public class ExlAnnotationBuilder {
 	 */
 	private static List<String> encapeTitles(Object data,Integer viewType){
 		List<String> result = null;
-		Field[] fiedls = data.getClass().getFields();
+		Field[] fiedls = data.getClass().getDeclaredFields();
 		Map<Integer, String> titleMap = new TreeMap<Integer, String>();
 		ExlData dataAnno;
 		
@@ -56,7 +57,6 @@ public class ExlAnnotationBuilder {
 				if(StringUtils.isNotBlank(dataAnno.title()[viewType])){
 					titleMap.put(dataAnno.sortId(), dataAnno.title()[viewType]);
 				}
-				
 			}
 		}
 		

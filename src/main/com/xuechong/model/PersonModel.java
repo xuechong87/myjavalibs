@@ -7,7 +7,7 @@ import com.xuechong.exl.annotations.ExlModel;
 public class PersonModel {
 	@ExlData(sortId=1,title={"姓名","姓名"})
 	private String name;
-	@ExlData(sortId=2,title={"年龄",""})
+	@ExlData(sortId=2,title={"年龄","age"})
 	private Integer age;
 	public PersonModel() {
 		super();

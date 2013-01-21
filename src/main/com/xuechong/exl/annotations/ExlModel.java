@@ -20,5 +20,5 @@ public @interface ExlModel {
 	 * @return
 	 * @author xuechong
 	 */
-	int[] viewTypes() default {0}; 
+	int[] viewTypes() default 0; 
 }
