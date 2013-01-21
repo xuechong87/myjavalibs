@@ -10,10 +10,8 @@ import com.xuechong.exl.processor.QueryResultProcessor;
 
 public class ExlQueryUtil {
 	
-	@SuppressWarnings("unchecked")
 	private BaseDao dao;
 	
-	@SuppressWarnings("unchecked")
 	public ExlQueryUtil(BaseDao dao){
 		super();
 		this.dao = dao;

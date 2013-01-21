@@ -4,12 +4,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 
 import org.apache.poi.ss.usermodel.Workbook;
-
-import com.xuechong.exl.annotations.ExlModel;
-
 
 public class AnnotationResultProcessor {
 	
@@ -19,12 +17,10 @@ public class AnnotationResultProcessor {
 		if(dataList==null||dataList.isEmpty()){
 			book = ExlBuilder.buildEmptyWorkBook(head,conditions);
 		}else{
-			book = ExlBuilder.buildWorkBook(head,conditions,dataList,viewType);
+			book = ExlAnnotationBuilder.buildAnnoWorkBook(head,conditions,dataList,viewType);
 		}
-		
 		writeBook(book);
 	}
-
 
 	/**
 	 * 输出
@@ -32,10 +28,8 @@ public class AnnotationResultProcessor {
 	 * @author xuechong
 	 */
 	private static void writeBook(Workbook book) {
-		File file = new File("c:/test1.xls");
-		FileOutputStream fos;
+		OutputStream fos = getOutStream();
 		try {
-			fos = new FileOutputStream(file);
 			book.write(fos);
 			fos.close();
 			fos.close();
@@ -48,5 +42,15 @@ public class AnnotationResultProcessor {
 		}
 	}
 	
+	private static OutputStream getOutStream(){
+		File file = new File(File.listRoots()[0].getPath() + "test.xls");
+		FileOutputStream fos = null;
+		try {
+			fos = new FileOutputStream(file);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		return fos;
+	}
 	
 }
