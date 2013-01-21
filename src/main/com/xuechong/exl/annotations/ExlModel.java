@@ -7,7 +7,13 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 声明为可用于导出EXL的模型
+ * 声明一个类为可用于导出EXL的模型<br>
+ * 如如下代码:
+ * <pre> @ExlModel(viewTypes={0,1,2,3})
+ * public class PersonModel {
+ * }
+ * </pre>
+ * 如果导出EXL的类不加上此注解则会抛出<tt>IllegalArgumentException</tt>
  * @author xuechong
  */
 @Target(ElementType.TYPE)
@@ -16,7 +22,8 @@ import java.lang.annotation.Target;
 public @interface ExlModel {
 	
 	/**
-	 * 导出的类型
+	 * EXL字段显示类型 <br>
+	 * 填入的值应为从0开始连续的正整数
 	 * @return
 	 * @author xuechong
 	 */

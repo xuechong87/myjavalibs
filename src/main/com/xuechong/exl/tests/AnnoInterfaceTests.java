@@ -17,14 +17,17 @@ public class AnnoInterfaceTests {
 		conditions.add("condition2=1256989009823");
 		conditions.add("condition3=11245363");
 
-		List<PersonModel> pList = new ArrayList<PersonModel>();
+		List<PersonModel> dataList = new ArrayList<PersonModel>();
 		PersonModel p1 = new PersonModel("p1", 1);
-		pList.add(p1);
+		dataList.add(p1);
 		PersonModel p2 = new PersonModel("p2", 2);
-		pList.add(p2);
+		dataList.add(p2);
 		PersonModel p3 = new PersonModel("p3", 3);
-		pList.add(p3);
-		ExlAnnotationUtil.export(pList);
+		dataList.add(p3);
+		//ExlAnnotationUtil.export(dataList);
+		//ExlAnnotationUtil.export(dataList, 3);
+		//ExlAnnotationUtil.export(dataList, 2);
+		ExlAnnotationUtil.export(dataList, 1);
 	}
 
 }

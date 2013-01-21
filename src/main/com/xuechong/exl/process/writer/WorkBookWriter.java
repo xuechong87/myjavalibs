@@ -24,7 +24,6 @@ public class WorkBookWriter {
 			fileName = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
 		}
 		OutputStream out = getOutStream(fileName);
-		
 		try {
 			book.write(out);
 			out.close();
@@ -46,20 +45,22 @@ public class WorkBookWriter {
 	public static OutputStream getOutStream(String fileName){
 		OutputStream out = null;
 		if (LOCAL_FILE) {
-			File file = new File(File.listRoots()[0].getPath() + fileName + ".xls");
+			File parent = new File(File.listRoots()[0].getPath() + "exportedExls");
+			parent.mkdir();
+			File file = new File(parent.getPath() + File.separator + fileName
+					+ ".xls");
 			try {
 				out = new FileOutputStream(file);
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
-		}else{
+		} else {
 			try {
 				out = ServletActionContext.getResponse().getOutputStream();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
-		
 		return out;
 	}
 }
