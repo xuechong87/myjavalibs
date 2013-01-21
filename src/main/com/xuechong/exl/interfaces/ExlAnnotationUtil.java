@@ -2,7 +2,7 @@ package com.xuechong.exl.interfaces;
 
 import java.util.List;
 
-import com.xuechong.exl.processor.AnnotationResultProcessor;
+import com.xuechong.exl.process.AnnotationResultProcessor;
 
 public class ExlAnnotationUtil {
 	

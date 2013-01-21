@@ -3,7 +3,7 @@ package com.xuechong.exl.tests;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.xuechong.exl.processor.AnnotationResultProcessor;
+import com.xuechong.exl.process.AnnotationResultProcessor;
 
 public class ExportTests {
 	@org.junit.Test

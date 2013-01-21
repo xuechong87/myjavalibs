@@ -1,11 +1,12 @@
 package com.xuechong.exl.mapping;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BookDataMapping {
 	
-	private List<String> titles;
-	private List<List<String>> datas;
+	private List<String> titles = new ArrayList<String>();
+	private List<List<String>> datas = new ArrayList<List<String>>();;
 	
 	public List<String> getTitles() {
 		return titles;

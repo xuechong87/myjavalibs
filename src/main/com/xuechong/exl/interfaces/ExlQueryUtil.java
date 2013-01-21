@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.xuechong.dao.BaseDao;
-import com.xuechong.exl.processor.QueryResultProcessor;
+import com.xuechong.exl.process.QueryResultProcessor;
 
 
 
