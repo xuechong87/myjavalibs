@@ -30,7 +30,8 @@ public class ExlAnnotationBuilder {
 		if(viewType==null){
 			viewType = 0;
 		}
-		Workbook book = ExlBuilder.buildHeanAndConditions(head,conditions);
+		Workbook book = ExlBuilder.buildHead(head);
+		book = ExlBuilder.buildConditions(conditions, book);
 		BookDataMapping bookData = new BookDataMapping();
 		bookData.setTitles(encapeTitles(dataList.get(0),viewType));
 		bookData.setDatas(encapeValue(dataList, viewType));

@@ -27,7 +27,7 @@ public class AnnoInterfaceTests {
 		//ExlAnnotationUtil.export(dataList);
 		//ExlAnnotationUtil.export(dataList, 3);
 		//ExlAnnotationUtil.export(dataList, 2);
-		ExlAnnotationUtil.export(dataList, 1);
+		ExlAnnotationUtil.export("asdasdasd",conditions,dataList, 1);
 	}
 
 }
