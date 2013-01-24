@@ -12,7 +12,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.struts2.ServletActionContext;
 
 public class WorkBookWriter {
-	
+	///wether the exl file will save in the local file system
 	private static final Boolean LOCAL_FILE = Boolean.TRUE;
 	/**
 	 * 输出

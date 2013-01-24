@@ -84,54 +84,12 @@ public class ExlBuilder {
 	}
 
 	/**
-	 * 创建头部与查询条件信息
-	 * 
-	 * @param head
-	 * @param conditions
-	 * @return
-	 * @author xuechong
-	 */
-	static Workbook buildHeanAndConditionss(String head, List<String> conditions) {
-		Workbook book = new HSSFWorkbook();
-		int curRow = 0;
-		String headTrim = StringUtils.trimToNull(head);
-		
-		Sheet sheet = book.createSheet(headTrim == null ? "Workbook" : headTrim);
-		if(headTrim!=null){
-			// put headcontent
-			Cell headCell = sheet.createRow(curRow).createCell(0);
-			sheet.addMergedRegion(createMergRegion(headTrim, curRow));
-			headCell.setCellStyle(ExlStyles.getHeadStyle(book));
-			headCell.setCellValue(headTrim);
-		}
-
-		// put conditions
-		if (conditions != null && !conditions.isEmpty()) {
-			for (int i = 0, end = conditions.size(); i < end; i++) {
-				if (i % 2 == 0) {// two conditions in each row
-					curRow++;
-					sheet.createRow(curRow);
-				}
-				// merg 3 Columns
-				Cell conditionCell = sheet.getRow(curRow).createCell(
-						i % 2 == 0 ? 0 : 3);
-				sheet.addMergedRegion(new CellRangeAddress(curRow, curRow,
-						conditionCell.getColumnIndex(), conditionCell.getColumnIndex() + 2));
-				conditionCell.setCellStyle(ExlStyles.getConditionStyle(book));
-				conditionCell.setCellValue(conditions.get(i));
-			}
-		}
-
-		return book;
-	}
-	/**
 	 * 创建头部信息
 	 * @param head
 	 * @return
 	 * @author xuechong
 	 */
 	public static Workbook buildHead(String head){
-		
 		Workbook book = new HSSFWorkbook();
 		int curRow = 0;
 		String headTrim = StringUtils.trimToNull(head);
@@ -147,6 +105,13 @@ public class ExlBuilder {
 		return book;
 	}
 	
+	/**
+	 * 构建查询条件信息
+	 * @param conditions
+	 * @param book
+	 * @return
+	 * @author xuechong
+	 */
 	public static Workbook buildConditions( List<String> conditions,Workbook book){
 		Sheet sheet = book.getSheetAt(0);
 		int curRow = sheet.getLastRowNum();
