@@ -14,7 +14,9 @@ import com.xuechong.exl.mapping.BookDataMapping;
 import com.xuechong.exl.process.builder.style.ExlStyles;
 
 public class ExlBuilder {
-	
+	/**
+	 * when there is no data for export ,show this in the exl content
+	 */
 	private static final String NO_DATA_WARN = "没有符合条件的数据!";
 	
 	/**
@@ -44,11 +46,13 @@ public class ExlBuilder {
 		if (data.getTitles().size() > 0) {
 			Row titleRow = sheet.createRow(curRowNum);
 			Cell titleCell;
+			//build the titles
 			for (int i = 0, end = data.getTitles().size(); i < end; i++) {
 				titleCell = titleRow.createCell(i);
 				titleCell.setCellValue(data.getTitles().get(i));
 				titleCell.setCellStyle(ExlStyles.getTitleStyle(book));
 			}
+			//build the datacontent
 			curRowNum++;
 			if (data.getDatas().size() > 0) {
 				Row dataRow;
@@ -68,7 +72,7 @@ public class ExlBuilder {
 
 	/**
 	 * 添加警告信息
-	 * 
+	 * build the "there is no data" warn
 	 * @param book
 	 * @return
 	 * @author xuechong

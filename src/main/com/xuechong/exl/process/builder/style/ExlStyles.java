@@ -49,7 +49,7 @@ public class ExlStyles {
 	}
 	
 	/**
-	 * the style of the conditions and contents
+	 * the style of the contents
 	 * @param wb
 	 * @return
 	 * @author xuechong
@@ -77,7 +77,7 @@ public class ExlStyles {
 	}
 	
 	/**
-	 * border styles
+	 * thin border styles
 	 * @param wb
 	 * @return
 	 * @author xuechong
@@ -96,7 +96,7 @@ public class ExlStyles {
     }
 	
 	/**
-	 * border styles
+	 * thick border styles
 	 * @param wb
 	 * @return
 	 * @author xuechong
