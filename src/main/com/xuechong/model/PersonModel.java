@@ -1,7 +1,7 @@
 package com.xuechong.model;
 
-import com.xuechong.exl.annotations.ExlData;
-import com.xuechong.exl.annotations.ExlModel;
+import com.xuechong.utils.exl.annotations.ExlData;
+import com.xuechong.utils.exl.annotations.ExlModel;
 
 @ExlModel(viewTypes={0,1,2,3})
 public class PersonModel {
