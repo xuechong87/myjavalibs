@@ -17,10 +17,9 @@ public class ObjectStructure {
         elements.remove(person);   
     }   
        
-    //遍历各种具体元素并执行他们的accept方法   
     public void display(Visitor visitor){   
         for(Person p:elements){   
             p.accept(visitor);   
         }   
-    }   
+    }
 }  
