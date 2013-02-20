@@ -28,7 +28,6 @@ public class StoppableThread extends Thread{
 		return this.stopRequested;
 	}
 	
-	
 }
 
 class StoppableThread2 extends Thread{
