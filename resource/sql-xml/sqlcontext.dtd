@@ -1,0 +1,5 @@
+<!ELEMENT sqlcontext (class*)>
+<!ELEMENT class (query*)>
+<!ELEMENT query (#PCDATA)>
+<!ATTLIST class name ID #REQUIRED>
+<!ATTLIST query id ID #REQUIRED>
