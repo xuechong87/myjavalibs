@@ -3,7 +3,7 @@ package com.xuechong.utils.sqlxml.context;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ClassSqlContext {
+public final class ClassSqlContext {
 	private Map<String,String> queryMap ;
 	ClassSqlContext(Map<String,String> queryMap){
 		super();
