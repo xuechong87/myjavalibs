@@ -14,6 +14,7 @@ import org.xml.sax.SAXException;
 
 
 public final class SqlContext {
+	private SqlContext(){}
 	
 	private static Map<String,ClassSqlContext> sqlContext = null;
 	

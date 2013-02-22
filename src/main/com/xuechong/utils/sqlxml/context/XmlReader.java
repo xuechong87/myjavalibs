@@ -11,6 +11,7 @@ import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 public final class XmlReader {
+	private XmlReader(){}
 	/**
 	 * the sql-context.xml path
 	 */
