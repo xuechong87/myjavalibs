@@ -56,6 +56,10 @@ public class WorkBookWriter {
 			}
 		} else {
 			try {
+				ServletActionContext.getResponse().setContentType("application/vnd.ms-excel;charset=uft-8"); 
+				ServletActionContext.getResponse().setHeader( 
+				"Content-Disposition", 
+				"attachment; filename=" + new String(fileName.getBytes("utf-8"),"ISO8859_1")); 
 				out = ServletActionContext.getResponse().getOutputStream();
 			} catch (IOException e) {
 				e.printStackTrace();
