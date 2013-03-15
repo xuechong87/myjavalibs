@@ -26,7 +26,14 @@ public class AnnotationResultProcessor {
 		SheetContent content = new SheetContent(head, conditions, dataList, viewType);
 		process(head, content);
 	}
-	
+	/**
+	 * process the datas with Annotataions
+	 * @throws NullPointerException if the sheetContents is null or empty
+	 * @throws IllegalArgumentException if there is no ExlModel Annotation on the data Objects
+	 * @param fileName
+	 * @param sheetContents
+	 * @author xuechong
+	 */
 	public static void process(String fileName,SheetContent... sheetContents){
 		if(sheetContents==null||sheetContents.length<1){
 			throw new NullPointerException("no SheetContent to build");
