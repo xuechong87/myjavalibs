@@ -7,11 +7,13 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Workbook;
 
 import com.xuechong.utils.exl.annotations.ExlData;
 import com.xuechong.utils.exl.annotations.ExlModel;
 import com.xuechong.utils.exl.mapping.BookDataMapping;
+import com.xuechong.utils.exl.mapping.SheetContent;
 
 public class ExlAnnotationBuilder {
 	
@@ -30,12 +32,26 @@ public class ExlAnnotationBuilder {
 		if(viewType==null){
 			viewType = 0;
 		}
-		Workbook book = ExlBuilder.buildHead(head);
-		book = ExlBuilder.buildConditions(conditions, book);
+		Workbook book = new HSSFWorkbook();
+		book = ExlBuilder.buildHead(head,book);
+		book = ExlBuilder.buildConditions(conditions, book,0);
 		BookDataMapping bookData = new BookDataMapping();
 		bookData.setTitles(encapeTitles(dataList.get(0),viewType));
 		bookData.setDatas(encapeValue(dataList, viewType));
-		ExlBuilder.buildDatas(book, bookData);
+		ExlBuilder.buildDatas(book, bookData,0);
+		return book;
+	}
+	public static Workbook buildAnnoWorkBook(SheetContent content,Workbook book,int sheetIndex) {
+		Integer viewType = content.getViewType();
+		if(viewType==null){
+			viewType = 0;
+		}
+		book = ExlBuilder.buildHead(content.getHead(),book);
+		book = ExlBuilder.buildConditions(content.getConditions(), book,sheetIndex);
+		BookDataMapping bookData = new BookDataMapping();
+		bookData.setTitles(encapeTitles(content.getDataList().get(0),viewType));
+		bookData.setDatas(encapeValue(content.getDataList(), viewType));
+		ExlBuilder.buildDatas(book, bookData,sheetIndex);
 		return book;
 	}
 	

@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Workbook;
 
 import com.xuechong.utils.exl.mapping.BookDataMapping;
@@ -26,15 +27,17 @@ public class ExlQueryBuilder {
 	@SuppressWarnings("unchecked")
 	public static Workbook buildQueryWorkBook(String head,
 			List<String> conditions, List<Map> datas, String queryString) {
-		Workbook book = ExlBuilder.buildHead(head);
-		book = ExlBuilder.buildConditions(conditions, book);
+		Workbook book = new HSSFWorkbook();
+		int sheetIndex = 0;
+		ExlBuilder.buildHead(head,book);
+		book = ExlBuilder.buildConditions(conditions, book,sheetIndex);
 		
 		BookDataMapping datasMapping = new BookDataMapping();
 		List<String> titles = encapeTitles(queryString, datas.get(0).keySet());
 		datasMapping.setTitles(titles);
 		datasMapping.setDatas(encapeDatas(datas,titles));
 		
-		return ExlBuilder.buildDatas(book, datasMapping);
+		return ExlBuilder.buildDatas(book, datasMapping,sheetIndex);
 	}
 	
 	/**

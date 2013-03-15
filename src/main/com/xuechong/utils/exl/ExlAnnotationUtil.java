@@ -2,6 +2,7 @@ package com.xuechong.utils.exl;
 
 import java.util.List;
 
+import com.xuechong.utils.exl.mapping.SheetContent;
 import com.xuechong.utils.exl.process.AnnotationResultProcessor;
 
 public class ExlAnnotationUtil {
@@ -33,5 +34,9 @@ public class ExlAnnotationUtil {
 	@SuppressWarnings("unchecked")
 	public static void export(String head,List<String> conditions,List dataList,Integer viewType){
 		AnnotationResultProcessor.process(head, conditions, dataList, viewType);
+	}
+	
+	public static void export(String fileName,SheetContent[] sheetContents){
+		AnnotationResultProcessor.process(fileName, sheetContents);
 	}
 }

@@ -3,7 +3,6 @@ package com.xuechong.utils.exl.process.builder;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -27,11 +26,12 @@ public class ExlBuilder {
 	 * @author xuechong
 	 */
 	public static Workbook buildEmptyWorkBook(String head,
-			List<String> conditions) {
-		Workbook book = buildHead(head);
-		book = buildConditions(conditions, book);
-		return buildNoDataWarns(book);
+			List<String> conditions,Workbook book,int sheetIndex) {
+		buildHead(head,book);
+		book = buildConditions(conditions, book,sheetIndex);
+		return buildNoDataWarns(book,sheetIndex);
 	}
+	
 	
 	/**
 	 * build the datacontents
@@ -40,8 +40,8 @@ public class ExlBuilder {
 	 * @return
 	 * @author xuechong
 	 */
-	static Workbook buildDatas(Workbook book,BookDataMapping data){
-		Sheet sheet = book.getSheetAt(0);
+	static Workbook buildDatas(Workbook book,BookDataMapping data,int sheetIndex){
+		Sheet sheet = book.getSheetAt(sheetIndex);
 		int curRowNum = sheet.getLastRowNum()+1;
 		if (data.getTitles().size() > 0) {
 			Row titleRow = sheet.createRow(curRowNum);
@@ -77,10 +77,11 @@ public class ExlBuilder {
 	 * @return
 	 * @author xuechong
 	 */
-	static Workbook buildNoDataWarns(Workbook book) {
-		int row = book.getSheetAt(0).getLastRowNum() + 1;
-		book.getSheetAt(0).addMergedRegion(createMergRegion(NO_DATA_WARN, row));
-		Row curRow = book.getSheetAt(0).createRow(row);
+	private static Workbook buildNoDataWarns(Workbook book,int sheetIndex) {
+		Sheet sheet = book.getSheetAt(sheetIndex);
+		int row = sheet.getLastRowNum() + 1;
+		sheet.addMergedRegion(createMergRegion(NO_DATA_WARN, row));
+		Row curRow = sheet.createRow(row);
 		Cell cell = curRow.createCell(0);
 		cell.setCellStyle(ExlStyles.getHeadStyle(book));
 		cell.setCellValue(NO_DATA_WARN);
@@ -93,11 +94,9 @@ public class ExlBuilder {
 	 * @return
 	 * @author xuechong
 	 */
-	public static Workbook buildHead(String head){
-		Workbook book = new HSSFWorkbook();
+	public static Workbook buildHead(String head,Workbook book){
 		int curRow = 0;
 		String headTrim = StringUtils.trimToNull(head);
-		
 		Sheet sheet = book.createSheet(headTrim == null ? "Workbook" : headTrim);
 		if(headTrim!=null){
 			// put headcontent
@@ -116,8 +115,8 @@ public class ExlBuilder {
 	 * @return
 	 * @author xuechong
 	 */
-	public static Workbook buildConditions( List<String> conditions,Workbook book){
-		Sheet sheet = book.getSheetAt(0);
+	public static Workbook buildConditions( List<String> conditions,Workbook book,int sheetIndex){
+		Sheet sheet = book.getSheetAt(sheetIndex);
 		int curRow = sheet.getLastRowNum();
 		// put conditions
 		if (conditions != null && !conditions.isEmpty()) {
@@ -147,7 +146,7 @@ public class ExlBuilder {
 	 * @return
 	 * @author xuechong
 	 */
-	static CellRangeAddress createMergRegion(String contentStr, Integer row) {
+	private static CellRangeAddress createMergRegion(String contentStr, Integer row) {
 		int width = contentStr.length() / 2 + 1;
 		return new CellRangeAddress(row, row, 0, width > 6 ? width : 6);
 	}
