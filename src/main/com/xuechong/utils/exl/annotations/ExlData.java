@@ -21,9 +21,10 @@ import java.lang.annotation.Target;
  *	private String idCode;
  *}
  *</pre>
+ * annotation on getters is support since 2013.3.15
  * @author xuechong
  */
-@Target(ElementType.FIELD)
+@Target({ElementType.FIELD,ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)  
 @Documented 
 public @interface ExlData {

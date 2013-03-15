@@ -23,6 +23,7 @@ public class PersonModel {
 		this.name = name;
 		this.age = age;
 	}
+	@ExlData(sortId=5,title={"姓名2","姓名2","",""})
 	public String getName() {
 		return name;
 	}

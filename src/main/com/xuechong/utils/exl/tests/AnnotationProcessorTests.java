@@ -46,7 +46,7 @@ public class AnnotationProcessorTests {
 		pList.add(p3);
 		SheetContent content1 = new SheetContent("head1", conditions, pList,null);
 		SheetContent content2 = new SheetContent("head2", conditions, pList,1);
-		
+
 		AnnotationResultProcessor.
 			process("sheetxls", new SheetContent[]{content1,content2});
 	}
