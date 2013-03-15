@@ -3,6 +3,11 @@ package com.xuechong.utils.exl.mapping;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * the mapping of the data and title content in exl
+ * @author xuechong
+ *
+ */
 public class BookDataMapping {
 	
 	private List<String> titles = new ArrayList<String>();

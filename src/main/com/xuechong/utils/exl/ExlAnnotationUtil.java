@@ -5,6 +5,11 @@ import java.util.List;
 import com.xuechong.utils.exl.mapping.SheetContent;
 import com.xuechong.utils.exl.process.AnnotationResultProcessor;
 
+/**
+ * the util to export the annotated Object list
+ * @author xuechong
+ *
+ */
 public class ExlAnnotationUtil {
 	
 	@SuppressWarnings("unchecked")
@@ -35,7 +40,13 @@ public class ExlAnnotationUtil {
 	public static void export(String head,List<String> conditions,List dataList,Integer viewType){
 		AnnotationResultProcessor.process(head, conditions, dataList, viewType);
 	}
-	
+	/**
+	 * to export exl with many sheets<br>
+	 * every SheetContent in sheetContents Array represents one sheet in the exported exl
+	 * @param fileName
+	 * @param sheetContents
+	 * @author xuechong
+	 */
 	public static void export(String fileName,SheetContent[] sheetContents){
 		AnnotationResultProcessor.process(fileName, sheetContents);
 	}

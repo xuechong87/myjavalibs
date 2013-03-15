@@ -44,7 +44,7 @@ public class WorkBookWriter {
 	 */
 	public static OutputStream getOutStream(String fileName){
 		OutputStream out = null;
-		if (LOCAL_FILE) {
+		if (LOCAL_FILE) {//return the local file outstream
 			File parent = new File(File.listRoots()[0].getPath() + "exportedExls");
 			parent.mkdir();
 			File file = new File(parent.getPath() + File.separator + fileName
@@ -54,7 +54,7 @@ public class WorkBookWriter {
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
-		} else {
+		} else {//return the struts2 based outstream
 			try {
 				ServletActionContext.getResponse().setContentType("application/vnd.ms-excel;charset=uft-8"); 
 				ServletActionContext.getResponse().setHeader( 

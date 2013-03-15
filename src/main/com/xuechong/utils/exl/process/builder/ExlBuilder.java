@@ -12,6 +12,11 @@ import org.apache.poi.ss.util.CellRangeAddress;
 import com.xuechong.utils.exl.mapping.BookDataMapping;
 import com.xuechong.utils.exl.process.builder.style.ExlStyles;
 
+/**
+ * the builder that make the BookDataMapping to a Workbook
+ * @author xuechong
+ *
+ */
 public class ExlBuilder {
 	/**
 	 * when there is no data for export ,show this in the exl content

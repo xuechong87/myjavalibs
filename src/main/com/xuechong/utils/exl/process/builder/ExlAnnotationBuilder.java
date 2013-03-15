@@ -27,16 +27,23 @@ public class ExlAnnotationBuilder {
 	 * @return
 	 * @author xuechong
 	 */
-	public static Workbook buildAnnoWorkBook(SheetContent content,Workbook book,int sheetIndex) {
+	public static Workbook buildAnnoWorkBook(
+			SheetContent content,Workbook book,int sheetIndex) {
+		
 		Integer viewType = content.getViewType();
 		if(viewType==null){
 			viewType = 0;
 		}
-		book = ExlBuilder.buildHead(content.getHead(),book);
-		book = ExlBuilder.buildConditions(content.getConditions(), book,sheetIndex);
 		BookDataMapping bookData = new BookDataMapping();
-		bookData.setTitles(encapeTitles(content.getDataList().get(0),viewType));
-		bookData.setDatas(encapeValue(content.getDataList(), viewType));
+		book = ExlBuilder.buildHead(content.getHead(),book);
+		book = ExlBuilder.
+			buildConditions(content.getConditions(), book,sheetIndex);
+		
+		bookData.setTitles(
+				encapeTitles(content.getDataList().get(0),viewType));
+		bookData.setDatas(
+				encapeValue(content.getDataList(), viewType));
+		
 		ExlBuilder.buildDatas(book, bookData,sheetIndex);
 		return book;
 	}
@@ -49,6 +56,7 @@ public class ExlAnnotationBuilder {
 	 * @author xuechong
 	 */
 	private static List<String> encapeTitles(Object data,Integer viewType){
+		
 		List<String> result = null;
 		Field[] fiedls = data.getClass().getDeclaredFields();
 		Method[] methods = data.getClass().getDeclaredMethods();
@@ -87,7 +95,8 @@ public class ExlAnnotationBuilder {
 		for (Object data : datas){
 			if (!validateModel(data)) {
 				throw new IllegalArgumentException("导出EXL时不支持的数据类型",
-						new Throwable("no annotation " + ExlModel.class.getName() + " find on object"));
+						new Throwable("no annotation " + 
+								ExlModel.class.getName() + " find on object"));
 			}
 			dataMap.clear();
 			
@@ -97,7 +106,7 @@ public class ExlAnnotationBuilder {
 			Field[] fields = data.getClass().getDeclaredFields();
 			for (Field field : fields) {
 				dataAnno = field.getAnnotation(ExlData.class);
-				field.setAccessible(true);
+				field.setAccessible(Boolean.TRUE);
 				if(isDisplayValue(dataAnno, viewType)){//when title is empty means no to display in exl
 					try {
 						dataMap.put(dataAnno.sortId(), 
@@ -113,7 +122,7 @@ public class ExlAnnotationBuilder {
 			Method[] methods = data.getClass().getDeclaredMethods();
 			for (Method getter : methods) {
 				dataAnno = getter.getAnnotation(ExlData.class);
-				getter.setAccessible(true);
+				getter.setAccessible(Boolean.TRUE);
 				if(isDisplayValue(dataAnno, viewType)){
 					try {
 						dataMap.put(dataAnno.sortId(),
@@ -137,7 +146,8 @@ public class ExlAnnotationBuilder {
 	}
 	
 	private static boolean isDisplayValue(ExlData dataAnno,Integer viewType){
-		return dataAnno!=null&&StringUtils.isNotBlank(dataAnno.title()[viewType]);
+		return dataAnno!=null &&
+				StringUtils.isNotBlank(dataAnno.title()[viewType]);
 	}
 	/**
 	 * validate if the model can be translate to exl<br>
