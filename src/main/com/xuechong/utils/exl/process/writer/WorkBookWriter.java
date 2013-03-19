@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -22,6 +23,9 @@ public class WorkBookWriter {
 	public static void writeBook(Workbook book,String fileName) {
 		if(fileName==null){
 			fileName = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
+		}
+		if(fileName.indexOf(".xls")<=0){
+			fileName+=".xls";
 		}
 		OutputStream out = getOutStream(fileName);
 		try {
@@ -54,12 +58,26 @@ public class WorkBookWriter {
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
-		} else {//return the struts2 based outstream
+		} else {//return the struts2 based out 
 			try {
-				ServletActionContext.getResponse().setContentType("application/vnd.ms-excel;charset=uft-8"); 
-				ServletActionContext.getResponse().setHeader( 
-				"Content-Disposition", 
-				"attachment; filename=" + new String(fileName.getBytes("utf-8"),"ISO8859_1")); 
+
+				String agent = (String) ServletActionContext.getRequest()
+						.getHeader("USER-AGENT");
+				if (agent != null && agent.indexOf("MSIE") == -1) {
+					ServletActionContext.getResponse().setHeader(
+							"Content-Disposition",
+							"attachment; filename=" +  
+							new String(fileName.getBytes("utf-8"),"ISO8859_1"));
+				} else {
+					// IE
+					ServletActionContext.getResponse().setHeader( 
+							"Content-Disposition", 
+							"attachment; filename=" +
+							URLEncoder.encode(fileName, "UTF8"));
+				}
+				
+				ServletActionContext.getResponse().
+				setContentType("application/vnd.ms-excel;charset=uft-8");
 				out = ServletActionContext.getResponse().getOutputStream();
 			} catch (IOException e) {
 				e.printStackTrace();
