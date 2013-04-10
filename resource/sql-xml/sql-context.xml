@@ -15,11 +15,6 @@
 		</query>
 	</class>
 	<class name="bbb">
-		<query id="list">
-			<![CDATA[
-				select * from Tetst
-			]]>
-		</query>
 	</class>
 </sqlcontext>
 

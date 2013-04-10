@@ -37,24 +37,43 @@ public class UrlConnectionUtil {
 		connection.setRequestProperty("Accept-Charset", "UTF-8");
 		connection.setUseCaches(false);
 		connection.connect();
-		
+		StringBuffer responseStr = new StringBuffer(""); 
+		try {
+			getResponseStr(parameters, connection);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally{
+			connection.disconnect();
+		}
+		return responseStr.toString();
+	}
+	private static StringBuffer getResponseStr(
+			Collection<Parameter> parameters, HttpURLConnection connection)
+			throws IOException {
+		StringBuffer responseStr = new StringBuffer("");
 		OutputStream out = connection.getOutputStream();
-		out.write(buildParameterStr(parameters).getBytes("UTF-8"));
-		out.flush();
-		out.close();
+		try {
+			out.write(buildParameterStr(parameters).getBytes("UTF-8"));
+			out.flush();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			if(out!=null)out.close();
+		}
+		
 		if(connection.getResponseCode()==200){
-			StringBuffer responseStr = new StringBuffer("");
 			BufferedReader reader = new BufferedReader(new InputStreamReader(
 					connection.getInputStream()));
-			for (String line = reader.readLine();line!=null;line = reader.readLine()) {
-				responseStr.append(line);
-			}
-			reader.close();
-			connection.disconnect();
-			return responseStr.toString();
+			try {
+				for (String line = reader.readLine();line!=null;line = reader.readLine()) {
+					responseStr.append(line);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally{if (reader!=null) reader.close();}
 		}
-		connection.disconnect();
-		return null;
+		return responseStr;
 	}
 	/**
 	 * 发送POST请求 (启动新线程)
