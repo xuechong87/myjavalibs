@@ -18,11 +18,11 @@ public class AnnoInterfaceTests {
 		conditions.add("condition3=11245363");
 
 		List<PersonModel> dataList = new ArrayList<PersonModel>();
-		PersonModel p1 = new PersonModel("p1", 1);
+		PersonModel p1 = new PersonModel("p112233qasad", 1);
 		dataList.add(p1);
-		PersonModel p2 = new PersonModel("p2", 2);
+		PersonModel p2 = new PersonModel("啊啊啊啊啊啊啊啊啊啊啊", 2);
 		dataList.add(p2);
-		PersonModel p3 = new PersonModel("p3", 3);
+		PersonModel p3 = new PersonModel("p311", 3);
 		dataList.add(p3);
 		//ExlAnnotationUtil.export(dataList);
 		//ExlAnnotationUtil.export(dataList, 3);

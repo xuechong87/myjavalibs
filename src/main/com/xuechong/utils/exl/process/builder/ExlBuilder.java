@@ -56,6 +56,7 @@ public class ExlBuilder {
 				titleCell = titleRow.createCell(i);
 				titleCell.setCellValue(data.getTitles().get(i));
 				titleCell.setCellStyle(ExlStyles.getTitleStyle(book));
+				expendColumnWidth(data.getTitles().get(i).length(), i, sheet);
 			}
 			//build the datacontent
 			curRowNum++;
@@ -68,6 +69,7 @@ public class ExlBuilder {
 						Cell dataCell = dataRow.createCell(j);
 						dataCell.setCellStyle(ExlStyles.getCommonStyle(book));
 						dataCell.setCellValue(data.getDatas().get(i).get(j));
+						expendColumnWidth(data.getDatas().get(i).get(j).length(), j, sheet);
 					}
 				}
 			}
@@ -154,6 +156,21 @@ public class ExlBuilder {
 	private static CellRangeAddress createMergRegion(String contentStr, Integer row) {
 		int width = contentStr.length() / 2 + 1;
 		return new CellRangeAddress(row, row, 0, width > 6 ? width : 6);
+	}
+	
+	/**
+	 * expend the column width
+	 * @param dataLength
+	 * @param columnIndex
+	 * @param sheet
+	 * @author xuechong
+	 */
+	private static void expendColumnWidth(int dataLength,int columnIndex,Sheet sheet){
+		int expectLength = (dataLength<<9);
+		if( dataLength > 4
+				&&sheet.getColumnWidth(columnIndex) < expectLength){
+			sheet.setColumnWidth(columnIndex,expectLength);
+		}
 	}
 
 }

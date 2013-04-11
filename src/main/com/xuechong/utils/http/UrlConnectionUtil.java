@@ -23,7 +23,8 @@ public class UrlConnectionUtil {
 	 * @throws IOException
 	 * @author xuechong
 	 */
-	public static String postReuqest(String url,Collection<Parameter> parameters) throws IOException {
+	public static String postReuqest(String url,Collection<Parameter> parameters) 
+		throws IOException {
 		
 		URL requestUrl = new URL(url);
 		HttpURLConnection connection =(HttpURLConnection) requestUrl.openConnection();
@@ -81,7 +82,8 @@ public class UrlConnectionUtil {
 	 * @param parameters 参数集合
 	 * @author xuechong
 	 */
-	public static void postNewThreadReuqest(final String url,final Collection<Parameter> parameters) {
+	public static void postNewThreadReuqest
+		(final String url,final Collection<Parameter> parameters) {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -106,7 +108,8 @@ public class UrlConnectionUtil {
 				sb.append(param.getKey());
 				sb.append("=");
 				try {
-					sb.append(param.getValue()!=null&&!param.getValue().isEmpty() ? URLEncoder.encode(param.getValue(), "UTF-8") : "");
+					sb.append(param.getValue()!=null&&!param.getValue().isEmpty() ?
+							URLEncoder.encode(param.getValue(), "UTF-8") : "");
 				} catch (UnsupportedEncodingException e) {
 					e.printStackTrace();
 					sb.append("");

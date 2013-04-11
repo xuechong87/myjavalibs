@@ -38,11 +38,11 @@ public class AnnotationProcessorTests {
 		conditions.add("condition3=11245363");
 		
 		List<PersonModel> pList = new ArrayList<PersonModel>();
-		PersonModel p1 = new PersonModel("p1",1);
+		PersonModel p1 = new PersonModel("p1wqeqeqweq",1);
 		pList.add(p1);
-		PersonModel p2 = new PersonModel("p2",2);
+		PersonModel p2 = new PersonModel("p2ffffa",2);
 		pList.add(p2);
-		PersonModel p3 = new PersonModel("p3",3);
+		PersonModel p3 = new PersonModel("p312344",3);
 		pList.add(p3);
 		SheetContent content1 = new SheetContent("head1", conditions, pList,null);
 		SheetContent content2 = new SheetContent("head2", conditions, pList,1);
