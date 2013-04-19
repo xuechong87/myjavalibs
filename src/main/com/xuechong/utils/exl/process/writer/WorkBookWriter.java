@@ -30,14 +30,19 @@ public class WorkBookWriter {
 		OutputStream out = getOutStream(fileName);
 		try {
 			book.write(out);
-			out.close();
-			out.close();
+			out.flush();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}finally{
-			out = null;
+			if(out!=null){
+				try {
+					out.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 	}
 	
