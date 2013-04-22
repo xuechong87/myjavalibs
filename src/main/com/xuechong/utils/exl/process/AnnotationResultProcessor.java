@@ -1,5 +1,6 @@
 package com.xuechong.utils.exl.process;
 
+import java.io.OutputStream;
 import java.util.List;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -36,6 +37,20 @@ public class AnnotationResultProcessor {
 	 * @author xuechong
 	 */
 	public static void process(String fileName,SheetContent... sheetContents){
+		Workbook book = getBookToWrite(sheetContents);
+		WorkBookWriter.writeBook(book,fileName);
+	}
+	
+	public static void process(String head,List<String> conditions,List dataList,Integer viewType,OutputStream out){
+		SheetContent content = new SheetContent(head, conditions, dataList, viewType);
+		process(head,out,content);
+	}
+	
+	public static void process(String fileName,OutputStream out,SheetContent... sheetContents){
+		Workbook book = getBookToWrite(sheetContents);
+		WorkBookWriter.writeBook(book,fileName,out);
+	}
+	private static Workbook getBookToWrite(SheetContent... sheetContents){
 		if(sheetContents==null||sheetContents.length<1){
 			throw new NullPointerException("no SheetContent to build");
 		}
@@ -48,9 +63,7 @@ public class AnnotationResultProcessor {
 				ExlAnnotationBuilder.buildAnnoWorkBook(content, book, i);
 			}
 		}
-		WorkBookWriter.writeBook(book,fileName);
+		return book;
 	}
-	
-	
 	
 }

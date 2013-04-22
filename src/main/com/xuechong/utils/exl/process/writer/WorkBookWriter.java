@@ -21,13 +21,25 @@ public class WorkBookWriter {
 	 * @author xuechong
 	 */
 	public static void writeBook(Workbook book,String fileName) {
+		OutputStream out = getOutStream(fileName);
+		writeBook(book, fileName, out);
+	}
+	/**
+	 * use the given outputstream to write WorkBook
+	 * @param book
+	 * @param fileName
+	 * @param out
+	 */
+	public static void writeBook(Workbook book,String fileName,OutputStream out){
 		if(fileName==null){
 			fileName = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
+		}
+		if(out==null){
+			throw new NullPointerException("the outputstream is null when try to write workbook");
 		}
 		if(fileName.indexOf(".xls")<=0){
 			fileName+=".xls";
 		}
-		OutputStream out = getOutStream(fileName);
 		try {
 			book.write(out);
 			out.flush();
@@ -43,7 +55,6 @@ public class WorkBookWriter {
 			}
 		}
 	}
-	
 	/**
 	 * get the outputstream to write the exl file
 	 * @return

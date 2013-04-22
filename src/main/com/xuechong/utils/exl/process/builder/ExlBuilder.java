@@ -15,7 +15,7 @@ import com.xuechong.utils.exl.process.builder.style.ExlStyles;
 import static com.xuechong.utils.exl.process.builder.ExlBuilderUtil.*;
 
 /**
- * the builder that make the BookDataMapping to a Workbook
+ * the builder that make the {@link BookDataMapping} to a {@link org.apache.poi.ss.usermodel.Workbook}
  * @author xuechong
  *
  */
