@@ -31,8 +31,6 @@ public class WorkBookWriter {
 		try {
 			book.write(out);
 			out.flush();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}finally{

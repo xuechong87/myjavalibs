@@ -12,6 +12,8 @@ import org.apache.poi.ss.util.CellRangeAddress;
 import com.xuechong.utils.exl.mapping.BookDataMapping;
 import com.xuechong.utils.exl.process.builder.style.ExlStyles;
 
+import static com.xuechong.utils.exl.process.builder.ExlBuilderUtil.*;
+
 /**
  * the builder that make the BookDataMapping to a Workbook
  * @author xuechong
@@ -56,7 +58,7 @@ public class ExlBuilder {
 				titleCell = titleRow.createCell(i);
 				titleCell.setCellValue(data.getTitles().get(i));
 				titleCell.setCellStyle(ExlStyles.getTitleStyle(book));
-				expendColumnWidth(data.getTitles().get(i).length(), i, sheet);
+				ExlBuilderUtil.expendColumnWidth(data.getTitles().get(i).length(), i, sheet);
 			}
 			//build the datacontent
 			curRowNum++;
@@ -144,33 +146,6 @@ public class ExlBuilder {
 		return book;
 	}
 
-	/**
-	 * merg cal<br>
-	 * cal the num of merg cloumns
-	 * 
-	 * @param contentStr
-	 * @param row
-	 * @return
-	 * @author xuechong
-	 */
-	private static CellRangeAddress createMergRegion(String contentStr, Integer row) {
-		int width = contentStr.length() / 2 + 1;
-		return new CellRangeAddress(row, row, 0, width > 6 ? width : 6);
-	}
 	
-	/**
-	 * expend the column width
-	 * @param dataLength
-	 * @param columnIndex
-	 * @param sheet
-	 * @author xuechong
-	 */
-	private static void expendColumnWidth(int dataLength,int columnIndex,Sheet sheet){
-		int expectLength = (dataLength<<9);
-		if( dataLength > 4
-				&&sheet.getColumnWidth(columnIndex) < expectLength){
-			sheet.setColumnWidth(columnIndex,expectLength);
-		}
-	}
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Workbook;
 
+import com.xuechong.utils.exl.annotations.ExlModel;
 import com.xuechong.utils.exl.mapping.SheetContent;
 import com.xuechong.utils.exl.process.builder.ExlAnnotationBuilder;
 import com.xuechong.utils.exl.process.builder.ExlBuilder;
@@ -14,7 +15,7 @@ public class AnnotationResultProcessor {
 	
 	/**
 	 * process the datas with Annotataions
-	 * @throws IllegalArgumentException if there is no ExlModel Annotation on the data Objects
+	 * @throws IllegalArgumentException if there is no {@link ExlModel} Annotation on the data Objects
 	 * @param head
 	 * @param conditions
 	 * @param dataList
@@ -29,7 +30,7 @@ public class AnnotationResultProcessor {
 	/**
 	 * process the datas with Annotataions
 	 * @throws NullPointerException if the sheetContents is null or empty
-	 * @throws IllegalArgumentException if there is no ExlModel Annotation on the data Objects
+	 * @throws IllegalArgumentException if there is no {@link ExlModel} Annotation on the data Objects
 	 * @param fileName
 	 * @param sheetContents
 	 * @author xuechong

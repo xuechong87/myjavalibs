@@ -151,7 +151,7 @@ public class ExlAnnotationBuilder {
 	}
 	/**
 	 * validate if the model can be translate to exl<br>
-	 * (wether the object has the <b>ExlModel</b> annotataion on its head)
+	 * (wether the object has the {@link ExlModel} annotataion on its head)
 	 * @param o
 	 * @return
 	 * @author xuechong
