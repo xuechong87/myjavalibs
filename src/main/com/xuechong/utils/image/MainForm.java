@@ -21,6 +21,9 @@ public class MainForm extends javax.swing.JFrame {
 	private JFileChooser fileChooser;
 	private javax.swing.JButton startButton;
 
+	//the processor is current running
+	private volatile boolean isProcessing = Boolean.FALSE;
+	
 	public MainForm() {
 		init();
 	}
@@ -97,10 +100,22 @@ public class MainForm extends javax.swing.JFrame {
 		pack();
 	}
 
-	private void startButtonActionPerformed(java.awt.event.ActionEvent evt) {
+	private synchronized void startButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		
+		if(this.folderChoosed.getText().length()<=0){
+			JOptionPane.showMessageDialog(this, "pleas choose a folder first");
+			return;
+		}
+		if(this.isProcessing){
+			JOptionPane.showMessageDialog(this, "the last task is processing now ,please wait a moment");
+			return;
+		}
 		//result is 0 when confirmed
 		int result = JOptionPane.showConfirmDialog(this, "confirm run?");
+		if(result==0){
+			this.isProcessing=Boolean.TRUE;
+			new Thread(new Processor(this)).start();
+		}
 		
 	}
 
@@ -122,5 +137,9 @@ public class MainForm extends javax.swing.JFrame {
 			}
 		});
 	}
-
+	
+	public synchronized void notifyProcessDone(){
+		this.isProcessing=Boolean.FALSE;
+	}
+	
 }
