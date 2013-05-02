@@ -38,6 +38,7 @@ public class MainForm extends javax.swing.JFrame {
 		this.fileChooser = new JFileChooser(File.listRoots()[0]);
 
 		this.setResizable(false);
+		this.folderChoosed.setEditable(false);
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
 		chooseButton.setText("choose");
