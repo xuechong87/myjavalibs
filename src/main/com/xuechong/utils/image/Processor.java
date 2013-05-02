@@ -1,5 +1,7 @@
 package com.xuechong.utils.image;
 
+import com.xuechong.utils.image.form.MainForm;
+
 public class Processor implements Runnable{
 	
 	private MainForm form;
