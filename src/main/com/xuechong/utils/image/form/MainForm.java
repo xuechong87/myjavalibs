@@ -62,7 +62,9 @@ public class MainForm extends javax.swing.JFrame {
 					.getAbsolutePath());
 		}
 	}
-	
+	/**
+	 * 当处理完成时通知完成
+	 */
 	public synchronized void notifyProcessDone(){
 		this.isProcessing=Boolean.FALSE;
 	}
@@ -175,8 +177,18 @@ public class MainForm extends javax.swing.JFrame {
 	public static void main(String args[]) {
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				new MainForm().setVisible(true);
+				MainForm form = new MainForm();
+				form.setVisible(true);
+				MainForm.logger = new StatusLogger(form);
 			}
 		});
 	}
+	private static StatusLogger logger ;
+	public static StatusLogger getLogger(){
+		return logger;
+	}
+	protected javax.swing.JLabel getStatusLabel() {
+		return statusLabel;
+	}
+	
 }

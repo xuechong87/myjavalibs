@@ -1,6 +1,7 @@
 package com.xuechong.utils.image.utils;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,14 +29,24 @@ public class FileUtil {
 	 * get all '*.jpg' file  names in the given folder
 	 * @return
 	 */
-	public static List<String> getAllImageNames(String path){
+	public static List<String> getAllImageNames(String folderPath,final boolean includeSmall){
 		List<String> result = new ArrayList<String>();
-		File[] allFiles = getFile(path);
+		File folder = new File(folderPath);
+		File[] allFiles = folder.listFiles(new FileFilter() {
+			@Override
+			public boolean accept(File pathname) {
+				return (
+						pathname.isFile()
+						&& (!pathname.getName().endsWith(".json"))
+						&& (includeSmall ? true:!pathname.getName().startsWith("s_"))
+						&& (!pathname.getName().equalsIgnoreCase("0.jpg"))//ignore the index pic 0.jpg
+						);
+			}
+		});
+
 		if(allFiles!=null&&allFiles.length>0){
 			for (int i = 0; i < allFiles.length; i++) {
-				if (allFiles[i].isFile()&&isImage(allFiles[i])) {
-					result.add(allFiles[i].getName());
-				}
+				result.add(allFiles[i].getName());
 			}
 		}
 		return result;
@@ -51,7 +62,6 @@ public class FileUtil {
 	
 	public static void main(String[] args) {
 		String path = "I:/GitHub/wangminghui86.github.com/pages/photo/g1";
-		System.out.println(getAllImageNames(path));
 	}
 	
 	
