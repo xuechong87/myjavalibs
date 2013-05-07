@@ -1,7 +1,5 @@
 package com.xuechong.utils.image.utils;
 
-import java.io.File;
-import java.io.FileFilter;
 import java.util.List;
 
 
@@ -12,7 +10,7 @@ public class JsonUtil {
 	 * @param allFolders
 	 * @return
 	 */
-	public static String buildAlbumList(List<String> allFolders){
+	public String buildAlbumList(List<String> allFolders){
 		StringBuilder result = new StringBuilder(
 				allFolders!=null&&!allFolders.isEmpty()?allFolders.size()*25:13);
 		result.append("{\"albums\":[");
@@ -34,7 +32,7 @@ public class JsonUtil {
 	 * @param folderPath
 	 * @return
 	 */
-	public static String buildContentJson(List<String> allFiles,String folderName){
+	public String buildContentJson(List<String> allFiles,String folderName){
 		StringBuffer result = new StringBuffer("{\"name\":\"");
 		result.append(folderName);
 		result.append("\",\"pics\":");
@@ -53,9 +51,4 @@ public class JsonUtil {
 	}
 
 	
-	public static void main(String[] arg){
-		String path = "D:/huihui/wangminghui86.github.com/pages/photo/g1";
-//		System.out.println(buildAlbumList(FileUtil.getFolderList(path)));
-		System.out.println(buildContentJson(FileUtil.getAllImageNames(path, false), "g1"));
-	}
 }

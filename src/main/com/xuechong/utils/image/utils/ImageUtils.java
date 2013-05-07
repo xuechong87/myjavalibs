@@ -23,7 +23,7 @@ public class ImageUtils {
 	 * @param width
 	 * @return
 	 */
-	public static BufferedImage scalByWidth(BufferedImage image,int width){
+	public BufferedImage scalByWidth(BufferedImage image,int width){
 		AffineTransform tx = new AffineTransform();
 		double rate = cal(image.getWidth(),width);
 		tx.scale(rate, rate);
@@ -38,7 +38,7 @@ public class ImageUtils {
 	 * @param height
 	 * @return
 	 */
-	public static BufferedImage scalByHeight(BufferedImage image,int height){
+	public BufferedImage scalByHeight(BufferedImage image,int height){
 		AffineTransform tx = new AffineTransform();
 		double rate = cal(image.getHeight(),height);
 		tx.scale(rate, rate);

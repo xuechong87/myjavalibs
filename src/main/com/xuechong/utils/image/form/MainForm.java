@@ -65,7 +65,7 @@ public class MainForm extends javax.swing.JFrame {
 	/**
 	 * 当处理完成时通知完成
 	 */
-	public synchronized void notifyProcessDone(){
+	public void notifyProcessDone(){
 		this.isProcessing=Boolean.FALSE;
 	}
 	
