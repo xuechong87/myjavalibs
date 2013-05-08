@@ -33,7 +33,7 @@ public class JsonUtil {
 	 * @return
 	 */
 	public String buildContentJson(List<String> allFiles,String folderName){
-		StringBuffer result = new StringBuffer("{\"name\":\"");
+		StringBuilder result = new StringBuilder("{\"name\":\"");
 		result.append(folderName);
 		result.append("\",\"pics\":");
 		result.append("[");
