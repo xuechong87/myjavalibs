@@ -7,6 +7,7 @@ import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
@@ -79,12 +80,20 @@ public class ImageUtils {
 		return result;
 	}
 	
+	public static BufferedImage readImage(String imgPath) throws IOException{
+		InputStream in = new FileInputStream(new File(imgPath));
+		Iterator<ImageReader> readers = ImageIO.getImageReadersByFormatName("jpg");
+		ImageReader reader = readers.next();
+		ImageInputStream imgIn = ImageIO.createImageInputStream(in);
+		reader.setInput(imgIn,true);
+		return reader.read(0);
+	}
 	/**
 	 * write the image
 	 * @param image
 	 * @param path the destination
 	 */
-	private static void writeJPG(BufferedImage image,String path){
+	public static void writeJPG(BufferedImage image,String path){
 		try {
 			ImageIO.write(image, "jpg", new File(path));
 		} catch (IOException e) {

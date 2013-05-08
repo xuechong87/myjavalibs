@@ -179,16 +179,19 @@ public class MainForm extends javax.swing.JFrame {
 			public void run() {
 				MainForm form = new MainForm();
 				form.setVisible(true);
-				MainForm.logger = new StatusLogger(form);
+				form.logger = new StatusLogger(form);
 			}
 		});
 	}
-	private static StatusLogger logger ;
-	public static StatusLogger getLogger(){
+	private StatusLogger logger ;
+	public StatusLogger getLogger(){
 		return logger;
 	}
 	protected javax.swing.JLabel getStatusLabel() {
 		return statusLabel;
+	}
+	public String getSelectedPath(){
+		return this.statusLabel.getText();
 	}
 	
 }
