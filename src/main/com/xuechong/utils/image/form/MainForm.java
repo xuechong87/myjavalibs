@@ -66,6 +66,7 @@ public class MainForm extends javax.swing.JFrame {
 	 * 当处理完成时通知完成
 	 */
 	public void notifyProcessDone(){
+		this.getLogger().replace("处理完成");
 		this.isProcessing=Boolean.FALSE;
 	}
 	
@@ -191,7 +192,7 @@ public class MainForm extends javax.swing.JFrame {
 		return statusLabel;
 	}
 	public String getSelectedPath(){
-		return this.statusLabel.getText();
+		return this.pathText.getText();
 	}
 	
 }

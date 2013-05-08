@@ -19,11 +19,14 @@ import com.xuechong.utils.image.utils.JsonUtil;
 public class Processor implements Runnable{
 	
 	
-	private static final boolean resizeCover = Boolean.FALSE;
-	private static final boolean resizeImage = Boolean.FALSE;
+	private static final boolean resizeCover = Boolean.TRUE;
+	private static final boolean resizeImage = Boolean.TRUE;
 	private static final int coverMaxPix = 110;//the max shorter length 
 	private static final String ALBUM = "albumlist.json";
+	private static final String CONTENT = "contents.json";
 	private static final String PHOTO_FOLDER = "photo";
+	private static final int contentMaxSize = 750;
+	private static final String coverName = "0.jpg";
 	
 	private final MainForm form;
 	private FileUtil fileUtil = new FileUtil();
@@ -44,9 +47,6 @@ public class Processor implements Runnable{
 	 */
 	@Override
 	public void run() {
-		for (int i = 0; i < Integer.MAX_VALUE-100; i++) {
-			System.out.println("111");
-		}
 		execute();
 		form.notifyProcessDone();
 	}
@@ -57,6 +57,7 @@ public class Processor implements Runnable{
 			createAlbumListJson();
 			doEachFolder();
 		} catch (Exception e) {
+			e.printStackTrace();
 			this.logger.replace("error");
 		}
 	}
@@ -64,7 +65,8 @@ public class Processor implements Runnable{
 	private void doEachFolder() throws IOException {
 		for(String path :fileUtil.getFolderList(this.basePath + File.separator + PHOTO_FOLDER)){
 			String folderPath =new StringBuilder().
-				append(this.basePath).append(File.separator).append(path).toString();
+				append(this.basePath).append(File.separator).append(PHOTO_FOLDER).
+				append(File.separator).append(path).toString();
 			if(resizeCover){
 				resizeCover(folderPath);
 			}
@@ -85,25 +87,38 @@ public class Processor implements Runnable{
 		}
 	}
 	
-	private void resizeImg(String folderPath) {
-		
+	private void resizeImg(String folderPath) throws IOException {
+		List<String> imgList = this.fileUtil.getAllImageNames(folderPath, false);
+		for (String imgName : imgList) {
+			String imgPath = folderPath + File.separator + imgName;
+			BufferedImage img = ImageUtils.readImage(imgPath);
+			if(img.getHeight()>contentMaxSize||img.getWidth()>contentMaxSize){
+				if(img.getWidth()>img.getHeight()){
+					img = this.imgUtil.scalByWidth(img, contentMaxSize);
+				}else{
+					img = this.imgUtil.scalByHeight(img, contentMaxSize);
+				}
+				ImageUtils.writeJPG(img,imgPath);
+			}
+		}
 	}
 	
 	private void createContentJson(String folderPath) throws IOException {
 		List<String> imgList = this.fileUtil.getAllImageNames(folderPath, false);
 		String folderName = folderPath.substring(
-				folderPath.lastIndexOf(File.separator), folderPath.length()-1);
+				folderPath.lastIndexOf(File.separator)+1, folderPath.length());
 		String json = this.jsonUtil.buildContentJson(imgList,folderName);
-		this.fileUtil.writeFile(folderPath, json);
+		this.fileUtil.writeFile(folderPath + File.separator + CONTENT, json);
 	}
 	
 	private void resizeCover(String folderPath) throws IOException {
-		BufferedImage img = ImageUtils.readImage(folderPath);
-		ImageUtils.writeJPG(this.imgUtil.scalByHeight(img, coverMaxPix), folderPath);
+		String imgPath = folderPath + File.separator + coverName;
+		BufferedImage img = ImageUtils.readImage(imgPath);
+		ImageUtils.writeJPG(this.imgUtil.scalByHeight(img, coverMaxPix), imgPath);
 	}
 	
 	private void createAlbumListJson() throws IOException {
-		String json = jsonUtil.buildAlbumList(fileUtil.getFolderList(this.basePath));
+		String json = jsonUtil.buildAlbumList(fileUtil.getFolderList(this.basePath + File.separator + PHOTO_FOLDER));
 		this.fileUtil.writeFile(this.basePath + File.separator + ALBUM, json);
 	}
 	
