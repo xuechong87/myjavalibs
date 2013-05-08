@@ -41,7 +41,7 @@ public class JsonUtil {
 			for (String string : allFiles) {
 				result.append("\"");
 				result.append(string.substring(0,
-						string.lastIndexOf(".")));
+						string.lastIndexOf(".")));//remove '.jpg suf'
 				result.append("\",");
 			}
 			result.deleteCharAt(result.length()-1);

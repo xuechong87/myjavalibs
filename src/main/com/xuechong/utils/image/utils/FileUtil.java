@@ -2,6 +2,8 @@ package com.xuechong.utils.image.utils;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,9 +58,17 @@ public class FileUtil {
 		return new File(absPath).listFiles();
 	}
 	
-	private static boolean isImage(File f){
-		return f.getName().lastIndexOf(".") == f.getName().lastIndexOf(".jpg");
-	}
-	
+	public void writeFile(String path,String content) throws IOException{
+		File file = new File(path);
+		FileWriter writer = new FileWriter(file);
+		try {
+			writer.write(content);
+			writer.flush();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			writer.close();
+		}
+	} 
 	
 }

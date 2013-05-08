@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 
 import javax.imageio.stream.FileImageInputStream;
 
@@ -18,23 +19,26 @@ import com.xuechong.utils.image.utils.JsonUtil;
 public class Processor implements Runnable{
 	
 	
-	private static boolean resizeCover = Boolean.FALSE;
+	private static final boolean resizeCover = Boolean.FALSE;
+	private static final boolean resizeImage = Boolean.FALSE;
 	private static final int coverMaxPix = 110;//the max shorter length 
 	private static final String ALBUM = "albumlist.json";
 	private static final String PHOTO_FOLDER = "photo";
 	
-	
 	private final MainForm form;
 	private FileUtil fileUtil = new FileUtil();
-	private String basePath ;
-	private StatusLogger logger ;
+	private JsonUtil jsonUtil = new JsonUtil();
 	private ImageUtils imgUtil = new ImageUtils();
+	
+	private StatusLogger logger ;
+	private String basePath ;
 	
 	public Processor(MainForm form){
 		this.form = form;
 		this.basePath = form.getSelectedPath();
 		this.logger = form.getLogger();
 	}
+	
 	/**
 	 * the main process method 
 	 */
@@ -64,8 +68,20 @@ public class Processor implements Runnable{
 			if(resizeCover){
 				resizeCover(folderPath);
 			}
-			resizeImg(folderPath);
-			createJson(folderPath);
+			if(resizeImage){
+				resizeImg(folderPath);
+			}
+			createSmallImages(folderPath);
+			createContentJson(folderPath);
+		}
+	}
+	
+	private void createSmallImages(String folderPath) throws IOException {
+		List<String> imgList = this.fileUtil.getAllImageNames(folderPath, false);
+		for (String imgName : imgList) {
+			BufferedImage img = ImageUtils.squareImg(folderPath + File.separator + imgName);
+			ImageUtils.writeJPG(this.imgUtil.scalByHeight(img, 80), 
+								folderPath + File.separator + "s_"+ imgName);
 		}
 	}
 	
@@ -73,8 +89,12 @@ public class Processor implements Runnable{
 		
 	}
 	
-	private void createJson(String folderPath) {
-		
+	private void createContentJson(String folderPath) throws IOException {
+		List<String> imgList = this.fileUtil.getAllImageNames(folderPath, false);
+		String folderName = folderPath.substring(
+				folderPath.lastIndexOf(File.separator), folderPath.length()-1);
+		String json = this.jsonUtil.buildContentJson(imgList,folderName);
+		this.fileUtil.writeFile(folderPath, json);
 	}
 	
 	private void resizeCover(String folderPath) throws IOException {
@@ -83,18 +103,8 @@ public class Processor implements Runnable{
 	}
 	
 	private void createAlbumListJson() throws IOException {
-		JsonUtil jsonUtil = new JsonUtil();
 		String json = jsonUtil.buildAlbumList(fileUtil.getFolderList(this.basePath));
-		File file = new File(this.basePath + File.separator + ALBUM);
-		FileWriter writer = new FileWriter(file);
-		try {
-			writer.write(json);
-			writer.flush();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally{
-			writer.close();
-		}
+		this.fileUtil.writeFile(this.basePath + File.separator + ALBUM, json);
 	}
 	
 }

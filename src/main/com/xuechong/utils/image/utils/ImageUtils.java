@@ -64,7 +64,7 @@ public class ImageUtils {
 	 * @return
 	 * @throws IOException
 	 */
-	private static BufferedImage squareImg(String originPath) throws IOException{
+	public static BufferedImage squareImg(String originPath) throws IOException{
 		InputStream in = new FileInputStream(new File(originPath));
 		Iterator<ImageReader> readers = ImageIO.getImageReadersByFormatName("jpg");
 		ImageReader reader = readers.next();
