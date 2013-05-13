@@ -1,4 +1,4 @@
-package com.xuechong.learn.effectivejava.thread;
+package com.xuechong.learn.effectivejava.code.thread;
 
 public class StoppableThread extends Thread{
 	

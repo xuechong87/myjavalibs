@@ -1,4 +1,4 @@
-package com.xuechong.learn.effectivejava.publicstaticarrays;
+package com.xuechong.learn.effectivejava.code.publicstaticarrays;
 
 import java.util.Arrays;
 import java.util.Collection;

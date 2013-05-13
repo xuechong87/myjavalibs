@@ -1,4 +1,4 @@
-package com.xuechong.learn.effectivejava.typesaveenum;
+package com.xuechong.learn.effectivejava.code.typesaveenum;
 
 /**
  * 安全类型枚举

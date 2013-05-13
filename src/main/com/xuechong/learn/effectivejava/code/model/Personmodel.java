@@ -1,4 +1,4 @@
-package com.xuechong.learn.effectivejava.model;
+package com.xuechong.learn.effectivejava.code.model;
 
 public class Personmodel implements Comparable<Personmodel>{
 	

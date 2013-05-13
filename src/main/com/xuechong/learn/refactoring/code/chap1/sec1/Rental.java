@@ -1,4 +1,4 @@
-package com.xuechong.learn.refactoring.chap1.sec1;
+package com.xuechong.learn.refactoring.code.chap1.sec1;
 
 /**
  * 租凭[表示某个顾客租了一部影片]

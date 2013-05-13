@@ -1,4 +1,4 @@
-package com.xuechong.learn.effectivejava.thread;
+package com.xuechong.learn.effectivejava.code.thread;
 
 /**
  * 永远不要在循环外调用wait

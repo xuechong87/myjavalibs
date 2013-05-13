@@ -1,4 +1,4 @@
-package com.xuechong.learn.effectivejava.compare;
+package com.xuechong.learn.effectivejava.code.compare;
 
 import java.math.BigDecimal;
 import java.util.HashSet;

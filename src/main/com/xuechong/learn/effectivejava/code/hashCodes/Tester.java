@@ -1,9 +1,9 @@
-package com.xuechong.learn.effectivejava.hashCodes;
+package com.xuechong.learn.effectivejava.code.hashCodes;
 
 
 import org.junit.Test;
 
-import com.xuechong.learn.effectivejava.model.Personmodel;
+import com.xuechong.learn.effectivejava.code.model.Personmodel;
 
 
 public class Tester {

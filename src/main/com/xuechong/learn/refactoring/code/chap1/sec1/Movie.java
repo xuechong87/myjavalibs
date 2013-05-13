@@ -1,4 +1,4 @@
-package com.xuechong.learn.refactoring.chap1.sec1;
+package com.xuechong.learn.refactoring.code.chap1.sec1;
 
 public class Movie {
 	public static final int CHILDREN = 2;
@@ -6,8 +6,8 @@ public class Movie {
 	public static final int NEW_RELEASE =1;
 	
 	private String _title;
-	private String _priceCode;
-	public Movie(String title, String priceCode) {
+	private int _priceCode;
+	public Movie(String title, int priceCode) {
 		super();
 		_title = title;
 		_priceCode = priceCode;
@@ -18,10 +18,10 @@ public class Movie {
 	public void setTitle(String title) {
 		_title = title;
 	}
-	public String getPriceCode() {
+	public int getPriceCode() {
 		return _priceCode;
 	}
-	public void setPriceCode(String priceCode) {
+	public void setPriceCode(int priceCode) {
 		_priceCode = priceCode;
 	}
 	
