@@ -29,7 +29,7 @@ public class ExlBuilderUtil {
 		int expectLength = (dataLength<<9);
 		if( dataLength > 4
 				&&sheet.getColumnWidth(columnIndex) < expectLength){
-			sheet.setColumnWidth(columnIndex,expectLength);
+			sheet.setColumnWidth(columnIndex,expectLength>255*256?255*256:expectLength);
 		}
 	}
 }
