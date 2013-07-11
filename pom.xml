@@ -159,10 +159,22 @@
 			<artifactId>gson</artifactId>
 			<version>2.2.2</version>
 		</dependency>
+		<!-- mina -->
 		<dependency>
 		 <groupId>org.apache.mina</groupId>
 		  <version>2.0.7</version>
 		  <artifactId>mina-core</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+		    <artifactId>slf4j-api</artifactId>
+		    <version>1.6.6</version>
+		</dependency>
+		<dependency>
+	        <groupId>org.slf4j</groupId>
+	        <artifactId>slf4j-jdk14</artifactId>
+	        <version>1.6.6</version>
+		</dependency>
+		<!-- mina -->
 	</dependencies>
 </project>
