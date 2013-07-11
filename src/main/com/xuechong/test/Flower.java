@@ -3,11 +3,11 @@ package com.xuechong.test;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.commons.io.output.FileWriterWithEncoding;
+import org.apache.commons.lang3.StringUtils;
 
 public class Flower {
 	private static final String save = "save(\"${name}\",\"${content}\")\n";
@@ -34,7 +34,7 @@ public class Flower {
 		Flower temp = null;
 		while(reader.ready()){
 			String readStr = reader.readLine();
-			if(readStr==null||readStr.trim().isEmpty()){
+			if(StringUtils.isBlank(readStr)){
 				status = 'e';
 			}else{
 				status = status=='e'?'t':'c';
