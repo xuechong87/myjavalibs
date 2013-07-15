@@ -6,12 +6,22 @@ import java.util.Map;
 import java.util.Properties;
 
 public class Hello {
-	private static final Map<String, String> cityMap = new HashMap<String, String>();
-	static {
-		cityMap.put("1", "OneCity");
-		cityMap.put("2", "TwoCity");
-		cityMap.put("3", "ThreeCity");
+	public static void main(String[] args) {
+		System.out.println(Integer.MAX_VALUE+1 == Integer.MIN_VALUE);
+//		int count =0;
+//		for (int i = 0x7fffffff-100; i <= 0x7fffffff; i++) {
+//			count ++;
+//			System.out.println(count);
+//		}
+//		System.out.println("fin");
+	}	
+	
+	public static void method1(){
+		byte bytes[] = new byte[256];    
+        for(int i = 0; i < 256; i++)
+            bytes[i] = (byte)i;
+        String str = new String(bytes);
+        for(int i = 0, n = str.length(); i < n; i++)
+            System.out.print((int)str.charAt(i) + " ");
 	}
-
-
 }

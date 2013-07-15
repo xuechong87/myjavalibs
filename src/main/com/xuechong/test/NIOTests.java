@@ -15,10 +15,10 @@ public class NIOTests {
 
 	@Test
 	public void socketChannel() throws IOException{
-		URL url = new URL("https://a248.e.akamai.net/assets.github.com/assets/github-6db070a7fd82c30d0b0bf14595d2913f6fa7886c.js");
+		URL url = new URL("http://127.0.0.1:8080/test");
 		String file = url.getFile( );
 
-		SocketAddress remote = new InetSocketAddress(url.getHost(), 80);
+		SocketAddress remote = new InetSocketAddress(url.getHost(), 8080);
 		SocketChannel socket = SocketChannel.open(remote);
 		socket.configureBlocking(false);
 		
@@ -30,9 +30,9 @@ public class NIOTests {
 	     + "Connection: close\r\n"
 	     + "Host: " + url.getHost() + "\r\n"
 	     + "\r\n";
-	    ByteBuffer header = ByteBuffer.wrap(request.getBytes("US-ASCII"));
+	    ByteBuffer header = ByteBuffer.wrap(request.getBytes("UTF-8"));
 	    socket.write(header);
-	    ByteBuffer buffer = ByteBuffer.allocate(8192);
+	    ByteBuffer buffer = ByteBuffer.allocate(2048);
 	    while (socket.read(buffer) != -1) {
 	      buffer.flip( );
 	      localFile.write(buffer);
