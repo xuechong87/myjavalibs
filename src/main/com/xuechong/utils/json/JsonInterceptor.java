@@ -57,7 +57,10 @@ public class JsonInterceptor implements Interceptor{
 		StringBuilder json = new StringBuilder("[");
 		for (String key : results.keySet()) {
 			json.append("\"").append(key).append("\"")
-			.append(":").append(results.get(key));
+			.append(":").append(results.get(key)).append(",");
+		}
+		if(json.length()>1){
+			json.deleteCharAt(json.length()-1);
 		}
 		json.append("]");
 		return json.toString();
