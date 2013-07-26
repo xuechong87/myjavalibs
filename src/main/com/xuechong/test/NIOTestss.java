@@ -156,7 +156,6 @@ class ThreadPool {
 		// Fill up the pool with worker threads
 		for (int i = 0; i < poolSize; i++) {
 			Worker thread = new Worker(this);
-
 			// Set thread name for debugging. Start it.
 			thread.setName("Worker" + (i + 1));
 			thread.start();
