@@ -24,4 +24,13 @@
 			<required>true</required>
 		</attribute>
 	</tag>
+	<tag>
+		<name>curTime</name>
+		<tag-class>com.xuechong.utils.jsptags.timetag.CurrentTime</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>format</name>
+			<required>true</required>
+		</attribute>
+	</tag>
 </taglib>
